@@ -30,7 +30,7 @@ namespace Jira.SDK.Domain
 		public String EpicStatus
 		{
 			get{
-				return (Fields.Customfield_10702 != null ? Fields.Customfield_10702.Value : "");
+				return (Fields.Customfield_10902 != null ? Fields.Customfield_10902.Value : "");
 			}
 		}
 
@@ -124,8 +124,8 @@ namespace Jira.SDK.Domain
 			};
 
 			Summary = summary;
-			ERPCode = "";
-			Rank = 0;
+			//ERPCode = "";
+			//Rank = 0;
 			Reporter = User.UndefinedUser;
 			Assignee = User.UndefinedUser;
 

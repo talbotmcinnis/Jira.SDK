@@ -197,6 +197,11 @@ namespace Jira.SDK.Domain
             set { Fields.Updated = value; }
         }
 
+        public Resolution Resolution
+        {
+            get { return Fields.Resolution; }
+        }
+
         public DateTime Resolved
         {
             get
@@ -228,9 +233,9 @@ namespace Jira.SDK.Domain
         {
             get
             {
-                if (_epic == null && !String.IsNullOrEmpty(this.Fields.Customfield_10700))
+                if (_epic == null && !String.IsNullOrEmpty(this.Fields.Customfield_10900))
                 {
-                    Issue issue = _jira.Client.GetIssue(this.Fields.Customfield_10700);
+                    Issue issue = _jira.Client.GetIssue(this.Fields.Customfield_10900);
                     issue.SetJira(_jira);
 
                     _epic = Epic.FromIssue(issue);
@@ -243,35 +248,35 @@ namespace Jira.SDK.Domain
             }
         }
 
-        public Int32 Rank
+        public String Rank
         {
             get
             {
-                return Fields.Customfield_10004;
+                return Fields.Customfield_11000;
             }
             set
             {
-                Fields.Customfield_10004 = value;
+                Fields.Customfield_11000 = value;
             }
         }
 
-        public String ERPCode
-        {
-            get
-            {
-                return (Fields.Customfield_11000 != null ? Fields.Customfield_11000.Value : "");
-            }
-            set
-            {
-                Fields.Customfield_11000 = new CustomField() { Value = value };
-            }
-        }
+        //public String ERPCode
+        //{
+        //    get
+        //    {
+        //        return (Fields.Customfield_11000 != null ? Fields.Customfield_11000.Value : "");
+        //    }
+        //    set
+        //    {
+        //        Fields.Customfield_11000 = new CustomField() { Value = value };
+        //    }
+        //}
 
         public Int32 SprintID
         {
             get
             {
-                String sprintDescription = Fields.Customfield_10300;
+                String sprintDescription = Fields.Customfield_10500;
                 if (!String.IsNullOrEmpty(sprintDescription))
                 {
                     MatchCollection matches = Regex.Matches(sprintDescription, ",id=(?<SprintID>\\d+)]");
@@ -291,13 +296,13 @@ namespace Jira.SDK.Domain
             }
         }
 
-        public String Severity
-        {
-            get
-            {
-                return (Fields.Customfield_10103 != null ? Fields.Customfield_10103.Value : "");
-            }
-        }
+        //public String Severity
+        //{
+        //    get
+        //    {
+        //        return (Fields.Customfield_10103 != null ? Fields.Customfield_10103.Value : "");
+        //    }
+        //}
 
         public Sprint Sprint { get; set; }
 
@@ -307,41 +312,41 @@ namespace Jira.SDK.Domain
             set;
         }
 
-        public String CurrentSituation
-        {
-            get
-            {
-                return Fields.Customfield_10402;
-            }
-            set
-            {
-                Fields.Customfield_10402 = value;
-            }
-        }
+        //public String CurrentSituation
+        //{
+        //    get
+        //    {
+        //        return Fields.Customfield_10402;
+        //    }
+        //    set
+        //    {
+        //        Fields.Customfield_10402 = value;
+        //    }
+        //}
 
-        public String ToBeSituation
-        {
-            get
-            {
-                return Fields.Customfield_10401;
-            }
-            set
-            {
-                Fields.Customfield_10401 = value;
-            }
-        }
+        //public String ToBeSituation
+        //{
+        //    get
+        //    {
+        //        return Fields.Customfield_10401;
+        //    }
+        //    set
+        //    {
+        //        Fields.Customfield_10401 = value;
+        //    }
+        //}
 
-        public String Benefit
-        {
-            get
-            {
-                return Fields.Customfield_10400;
-            }
-            set
-            {
-                Fields.Customfield_10400 = value;
-            }
-        }
+        //public String Benefit
+        //{
+        //    get
+        //    {
+        //        return Fields.Customfield_10400;
+        //    }
+        //    set
+        //    {
+        //        Fields.Customfield_10400 = value;
+        //    }
+        //}
 
         private List<IssueLink> IssueLinks
         {
@@ -353,6 +358,18 @@ namespace Jira.SDK.Domain
             {
                 Fields.IssueLinks = value;
             }
+        }
+
+        public String DefinitionOfDone
+        {
+            get { return Fields.Customfield_11501; }
+            set { Fields.Customfield_11501 = value; }
+        }
+
+        public Double? StoryPoints
+        {
+            get { return Fields.Customfield_10105; }
+            set { Fields.Customfield_10105 = value; }
         }
 
         /// <summary>
@@ -470,25 +487,32 @@ namespace Jira.SDK.Domain
         public ParentIssue Parent { get; set; }
         public List<Subtask> Subtasks { get; set; }
         public TimeTracking TimeTracking { get; set; }
+        
         //Epic link
-        public String Customfield_10700 { get; set; }
+        public String Customfield_10900 { get; set; }
         //Rank
-        public Int32 Customfield_10004 { get; set; }
-        //ERP Code
-        public CustomField Customfield_11000 { get; set; }
+        public String Customfield_11000 { get; set; }
+        ////ERP Code
+        //public CustomField Customfield_11000 { get; set; }
         //Epic Status
-        public CustomField Customfield_10702 { get; set; }
+        public CustomField Customfield_10902 { get; set; }
         //SprintID
-        public String Customfield_10300 { get; set; }
-        //Severity
-        public CustomField Customfield_10103 { get; set; }
-        //Current situation
-        public String Customfield_10402 { get; set; }
-        //To Be Situation
-        public String Customfield_10401 { get; set; }
-        //Benefit
-        public String Customfield_10400 { get; set; }
+        public String Customfield_10500 { get; set; }
+        ////Severity
+        //public CustomField Customfield_10103 { get; set; }
+        ////Current situation
+        //public String Customfield_10402 { get; set; }
+        ////To Be Situation
+        //public String Customfield_10401 { get; set; }
+        ////Benefit
+        //public String Customfield_10400 { get; set; }
 
+        //Defintion Of Done
+        public String Customfield_11501 { get; set; }
+
+        //Story Points
+        public Double? Customfield_10105 { get; set; }
+        
         public WorklogSearchResult Worklog { get; set; }
 
         public List<IssueLink> IssueLinks { get; set; }
